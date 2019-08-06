@@ -46,6 +46,16 @@ namespace swapping_window
         public Rectangle center = new Rectangle(400,300,10,10);
         Texture2D pixel;
 
+        // Castar this till ett vanligt windows form!
+        private System.Windows.Forms.Form TheGameAsForm
+        {
+            get
+            {
+                return (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
+            }
+        }
+
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -54,6 +64,9 @@ namespace swapping_window
 
             graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 600;
+            TheGameAsForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            TheGameAsForm.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.IsMouseVisible = true;
         }
 
         protected override void BeginRun()
@@ -112,10 +125,34 @@ namespace swapping_window
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if(lastKBState.IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyUp(Keys.A))
+            
+
+            if (b.Visible == false)
             {
-                b.Visible = !b.Visible;
+                if (lastKBState.IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyUp(Keys.S))
+                {
+                    if (graphics.IsFullScreen)
+                    {
+                        graphics.IsFullScreen = false;
+                        graphics.ApplyChanges();
+                    }
+                    else
+                    {
+                        graphics.IsFullScreen = true;
+                        graphics.ApplyChanges();
+                    }
+                }
+
             }
+
+            if (graphics.IsFullScreen == false)
+            {
+                if (lastKBState.IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyUp(Keys.A))
+                {
+                    b.Visible = !b.Visible;
+                }
+            }
+
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 this.Exit();
@@ -200,6 +237,23 @@ namespace swapping_window
                 "press A to toggle visibility!",
                 new Vector2(600, 60),
                 Color.White);
+
+            if (graphics.IsFullScreen)
+            {
+                spriteBatch.DrawString(
+                    font,
+                    "fullscreen",
+                    new Vector2(600, 80),
+                    Color.White);
+            }
+            else
+            {
+                spriteBatch.DrawString(
+                    font,
+                    "!fullscreen",
+                    new Vector2(600, 80),
+                    Color.White);
+            }
 
             spriteBatch.Draw(pixel, center, Color.White);
 
