@@ -125,8 +125,7 @@ namespace swapping_window
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            
-
+            // Ifall cefsharp INTE är synligt kan vi byta till fullskärmsläge.
             if (b.Visible == false)
             {
                 if (lastKBState.IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyUp(Keys.S))
@@ -145,6 +144,7 @@ namespace swapping_window
 
             }
 
+            // Ifall vi INTE är i fullskärmsläge kan vi visa cefsharp.
             if (graphics.IsFullScreen == false)
             {
                 if (lastKBState.IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyUp(Keys.A))
@@ -169,8 +169,6 @@ namespace swapping_window
                 listan.RemoveRange(0, 100);
             }
 
-
-            // TODO: Add your update logic here
             elapsedTime += gameTime.ElapsedGameTime.TotalMilliseconds;
 
             if (gameTime.IsRunningSlowly)
@@ -242,7 +240,7 @@ namespace swapping_window
             {
                 spriteBatch.DrawString(
                     font,
-                    "fullscreen",
+                    "fullscreen (Press S to switch)",
                     new Vector2(600, 80),
                     Color.White);
             }
@@ -250,7 +248,7 @@ namespace swapping_window
             {
                 spriteBatch.DrawString(
                     font,
-                    "!fullscreen",
+                    "!fullscreen (Press S to switch)",
                     new Vector2(600, 80),
                     Color.White);
             }

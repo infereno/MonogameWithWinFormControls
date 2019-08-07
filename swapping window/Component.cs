@@ -11,7 +11,8 @@ using System.Windows.Forms;
 
 namespace swapping_window
 {
-    public class MyComponent : GameComponent
+    // not used..
+    /*public class MyComponent : GameComponent
     {
 
         Form windowsGameForm;
@@ -55,9 +56,9 @@ namespace swapping_window
         {
             this.userControl11.Location = new System.Drawing.Point(0, 0);
             this.userControl11.Name = "userControl11";
-            this.userControl11.Size = new System.Drawing.Size(400, 506);
+            this.userControl11.Size = new System.Drawing.Size(800, 506);
             this.userControl11.TabIndex = 1;
             windowsGameForm.Controls.Add(userControl11);
         }
-    }
+    }*/
 }
